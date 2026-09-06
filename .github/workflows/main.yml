@@ -21,7 +21,7 @@ jobs:
       run: pip install pyinstaller
 
     - name: Compilar o executável
-      run: pyinstaller --onefile --console epidemiologia.py
+      run: pyinstaller --onefile --console EpdlogAnalitic.py
 
     - name: Salvar o .exe gerado para download
       uses: actions/upload-artifact@v4
