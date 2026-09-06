@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # O GitHub aloca um Windows de graça
+    runs-on: windows-latest
 
     steps:
     - name: Baixar o código do repositório
@@ -21,10 +21,12 @@ jobs:
       run: pip install pyinstaller
 
     - name: Compilar o executável
+      # Nome do arquivo corrigido exatamente como está no seu repositório
       run: pyinstaller --onefile --console EpdlogAnalitic.py
 
     - name: Salvar o .exe gerado para download
       uses: actions/upload-artifact@v4
       with:
         name: Epidemiologia-App-Windows
-        path: dist/epidemiologia.exe
+        # Usando o curinga *.exe para garantir que qualquer executável gerado seja capturado
+        path: dist/*.exe
