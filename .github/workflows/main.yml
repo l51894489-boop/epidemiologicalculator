@@ -1,0 +1,30 @@
+name: Gerar Executável Windows
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest  # O GitHub aloca um Windows de graça
+
+    steps:
+    - name: Baixar o código do repositório
+      uses: actions/checkout@v4
+
+    - name: Configurar o Python nativo do Windows
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Instalar PyInstaller
+      run: pip install pyinstaller
+
+    - name: Compilar o executável
+      run: pyinstaller --onefile --console epidemiologia.py
+
+    - name: Salvar o .exe gerado para download
+      uses: actions/upload-artifact@v4
+      with:
+        name: Epidemiologia-App-Windows
+        path: dist/epidemiologia.exe
